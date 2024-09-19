@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ControlComponent } from "../../../shared/control/control.component";
 import { ButonComponent } from '../../../shared/buton/buton.component';
 import { FormsModule } from '@angular/forms';
@@ -11,9 +11,12 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './new-ticket.component.css'
 })
 export class NewTicketComponent {
+  @ViewChild('form') form?: ElementRef<HTMLFormElement>;
+
   onSubmit(title: string, ticketText: string) {
     console.log(title);
     console.log(ticketText);
-  }
 
+    this.form?.nativeElement.reset()
+  }
 }
