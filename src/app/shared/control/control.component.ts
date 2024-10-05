@@ -1,4 +1,4 @@
-import { Component, contentChild, ContentChild, ElementRef, inject, input, ViewEncapsulation } from '@angular/core';
+import { AfterContentInit, Component, contentChild, ContentChild, ElementRef, inject, input, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-control',
@@ -12,12 +12,16 @@ import { Component, contentChild, ContentChild, ElementRef, inject, input, ViewE
     '(click)': 'onClick()'
   }
 })
-export class ControlComponent {
+export class ControlComponent implements AfterContentInit{
   label = input.required<string>();
   private el = inject(ElementRef);
   // @ContentChild('input') private control?: ElementRef<HTMLInputElement | HTMLTextAreaElement>
   private control = contentChild<ElementRef<HTMLElement | HTMLTextAreaElement>>('input')
-
+  
+  ngAfterContentInit(): void {
+    throw new Error('Method not implemented.');
+  }
+  
   onClick() {
     console.log('Clicked');
     console.log(this.el);
