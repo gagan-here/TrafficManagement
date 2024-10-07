@@ -15,7 +15,6 @@ export class ServerStatusComponent implements OnInit {
     effect(() => {
       console.log(this.currentStatus());
     })
-    console.log(this.currentStatus());
   }
 
   ngOnInit() {

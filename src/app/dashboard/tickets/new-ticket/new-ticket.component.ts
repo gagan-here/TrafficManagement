@@ -1,4 +1,4 @@
-import { AfterViewChecked, Component, ElementRef, OnInit, viewChild, ViewChild } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, EventEmitter, OnInit, output, Output, viewChild, ViewChild } from '@angular/core';
 import { ControlComponent } from "../../../shared/control/control.component";
 import { ButonComponent } from '../../../shared/buton/buton.component';
 import { FormsModule } from '@angular/forms';
@@ -13,7 +13,9 @@ import { FormsModule } from '@angular/forms';
 export class NewTicketComponent implements OnInit, AfterViewChecked {
   @ViewChild('form') form?: ElementRef<HTMLFormElement>;
   // private form = viewChild.required<ElementRef<HTMLFormElement>>('form');
-  
+  // @Output() add = new EventEmitter();
+  add = output<{ title: string; text: string }>();
+
   ngOnInit() {
     console.log('ONINIT');
     console.log(this.form?.nativeElement);
@@ -25,9 +27,7 @@ export class NewTicketComponent implements OnInit, AfterViewChecked {
   }
 
   onSubmit(title: string, ticketText: string) {
-    console.log(title);
-    console.log(ticketText);
-
+    this.add.emit({ title: title, text: ticketText })
     this.form?.nativeElement.reset()
   }
 }
